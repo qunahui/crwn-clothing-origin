@@ -5,13 +5,15 @@ import { Route } from 'react-router-dom';
 import { ShopPageContainer } from './shop.styles.js';
 
 import { fetchCollectionsStart } from '../../redux/shop/shop.actions';
-
-import Spinner from '../../components/spinner/spinner.component';
+import Spinner from '../../components/spinner/spinner.component.jsx';
 
 const CollectionsOverviewContainer = lazy(() =>
   import('../../components/collections-overview/collections-overview.container')
 );
-const CollectionPage = lazy(() => import('../collection/collection.component'));
+const CollectionPageContainer = lazy(() =>
+  import('../collection/collection.container')
+);
+const ItemPageContainer = lazy(() => import('../itempage/itempage.container'));
 
 class ShopPage extends React.Component {
   componentDidMount() {
@@ -20,18 +22,19 @@ class ShopPage extends React.Component {
   }
 
   render() {
-    const { match } = this.props;
     return (
       <ShopPageContainer>
         <Suspense fallback={<Spinner />}>
+          <Route exact path="/shop" component={CollectionsOverviewContainer} />
           <Route
-            component={CollectionsOverviewContainer}
             exact
-            path={`${match.path}`}
+            path="/shop/:collectionId"
+            component={CollectionPageContainer}
           />
           <Route
-            path={`${match.path}/:collectionId`}
-            component={CollectionPage}
+            exact
+            path="/shop/:collectionId/:itemSlug"
+            component={ItemPageContainer}
           />
         </Suspense>
       </ShopPageContainer>

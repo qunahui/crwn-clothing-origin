@@ -23,7 +23,13 @@ const CollectionItem = ({ item, addItem }) => {
         <NameContainer className="name">{name}</NameContainer>
         <PriceContainer className="price">{price}</PriceContainer>
       </CollectionFooterContainer>
-      <AddButton onClick={() => addItem(item)} inverted>
+      <AddButton
+        onClick={(e) => {
+          e.preventDefault();
+          addItem(item);
+        }}
+        inverted
+      >
         Add to cart
       </AddButton>
     </CollectionItemContainer>

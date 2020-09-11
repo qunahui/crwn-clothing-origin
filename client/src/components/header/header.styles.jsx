@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom';
 export const HeaderContainer = styled.div`
   height: 70px;
   width: 100%;
+  padding: 40px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 25px;
 `;
 
 export const LogoContainer = styled(Link)`
   height: 100%;
   width: 70px;
-  padding: 25px;
+  transform: translateY(-20px);
 `;
 
 export const OptionContainer = styled.div`

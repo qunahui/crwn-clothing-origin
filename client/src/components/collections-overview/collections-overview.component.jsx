@@ -10,7 +10,7 @@ import CollectionPreview from '../collection-preview/collection-preview';
 const CollectionsOverview = ({ collections }) => (
   <div className="collections-overview">
     {collections.map(({ id, ...otherCollectionsProps }) => (
-      <CollectionPreview key={id} {...otherCollectionsProps} />
+      <CollectionPreview key={id} limit={5} {...otherCollectionsProps} />
     ))}
   </div>
 );

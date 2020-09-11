@@ -8,12 +8,15 @@ import { GlobalStyles } from './global.styles';
 import Header from './components/header/header.component';
 import Spinner from './components/spinner/spinner.component';
 import ErrorBoundary from './components/error-boundary/error-boundary.component';
+import ScrollToTop from './components/scroll-to-top/scroll-to-top.component';
 
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { checkUserSession } from './redux/user/user.actions';
 
 const HomePage = lazy(() => import('./pages/homepage/homepage.component'));
 const ShopPage = lazy(() => import('./pages/shop/shop.component'));
+
+// load lazy
 const SignInAndSignUpPage = lazy(() =>
   import('./pages/sign-in-and-sign-up/sign-in-and-sign-up.component')
 );
@@ -21,6 +24,7 @@ const CheckoutPage = lazy(() => import('./pages/checkout/checkout.component'));
 const ErrorTestPage = lazy(() =>
   import('./pages/error-test/error-test.component')
 );
+// end lazy
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
@@ -41,23 +45,25 @@ class App extends React.Component {
         <GlobalStyles />
         <Switch>
           <ErrorBoundary>
-            <Suspense fallback={<Spinner />}>
-              <Route exact path="/" component={HomePage} />
-              <Route path="/shop" component={ShopPage} />
-              <Route exact path="/error" component={ErrorTestPage} />
-              <Route exact path="/checkout" component={CheckoutPage} />
-              <Route
-                exact
-                path="/signin"
-                render={() =>
-                  this.props.currentUser ? (
-                    <Redirect to="/" />
-                  ) : (
-                    <SignInAndSignUpPage />
-                  )
-                }
-              />
-            </Suspense>
+            <ScrollToTop>
+              <Suspense fallback={<Spinner />}>
+                <Route exact path="/" component={HomePage} />
+                <Route path="/shop" component={ShopPage} />
+                <Route exact path="/error" component={ErrorTestPage} />
+                <Route exact path="/checkout" component={CheckoutPage} />
+                <Route
+                  exact
+                  path="/signin"
+                  render={() =>
+                    this.props.currentUser ? (
+                      <Redirect to="/" />
+                    ) : (
+                      <SignInAndSignUpPage />
+                    )
+                  }
+                />
+              </Suspense>
+            </ScrollToTop>
           </ErrorBoundary>
         </Switch>
       </div>

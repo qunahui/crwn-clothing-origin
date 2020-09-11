@@ -53,6 +53,31 @@ export const addCollectionAndDocuments = async (collectionKey, objectToAdd) => {
   await batch.commit();
 };
 
+export const createSlugForDocuments = async (collectionKey) => {
+  const collectionRef = firestore.collection(collectionKey);
+
+  const batch = firestore.batch();
+
+  const collections = await collectionRef.get();
+
+  collections.docs.forEach((collection, index) => {
+    let { items, ...otherProps } = collection.data();
+
+    items.forEach((collectionItem) => {
+      let slug = collectionItem.name
+        .toLowerCase()
+        .split('-')
+        .join('_')
+        .split(' ')
+        .join('-');
+      collectionItem.slug = slug;
+    });
+    batch.set(collection.ref, { items, ...otherProps });
+  });
+
+  await batch.commit();
+};
+
 export const convertCollectionsSnapshotToMap = (collectionSnapshot) => {
   const transformedCollection = collectionSnapshot.docs.map((doc) => {
     const { title, items } = doc.data();

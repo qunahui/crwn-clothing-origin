@@ -20,12 +20,17 @@ export const selectCollection = memoize((collectionUrlParam) =>
   )
 );
 
-export const selectIsCollectionFetching = createSelector(
+export const selectItem = (collectionId, itemSlugToFind) =>
+  createSelector([selectCollection(collectionId)], (collection) =>
+    collection.items.find((item) => item.slug === itemSlugToFind)
+  );
+
+export const selectIsCollectionsFetching = createSelector(
   [selectShop],
   (shop) => shop.isFetching
 );
 
-export const selectIsCollectionLoaded = createSelector(
+export const selectIsCollectionsLoaded = createSelector(
   [selectShop],
   (shop) => !!shop.collections
 );
