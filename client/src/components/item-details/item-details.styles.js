@@ -181,6 +181,7 @@ export const DetailsStyles = css`
   flex-direction: column;
 `;
 export const FinishCollectionStyles = css`
+  height: 1000px;
   width: 100%;
   justify-content: center;
   align-items: center;
