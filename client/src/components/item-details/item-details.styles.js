@@ -191,6 +191,7 @@ export const FinishCollectionStyles = css`
   & > div {
     width: 100%;
     overflow-x: overlay;
+    scroll-behavior: smooth;
     & > div:first-child {
       width: 200%;
     }

@@ -66,6 +66,8 @@ class ItemDetails extends React.Component {
       activePreviewValue: '1',
       activeNavValue: '1',
     };
+
+    this.scrollRef = React.createRef();
   }
 
   addCart = (e) => {
@@ -215,12 +217,22 @@ class ItemDetails extends React.Component {
               contentStyle="finish-collection"
             >
               <h1>FINISH YOUR COLLECTION</h1>
-              <div>
+              <div ref={this.scrollRef}>
                 <CollectionPreview {...this.props.collection} limit={7} />
-                <LeftArrowContainer>
+                <LeftArrowContainer
+                  onClick={() => {
+                    console.log(this.scrollRef);
+                    this.scrollRef.current.scrollLeft -= 200;
+                  }}
+                >
                   <LeftArrowIconContainer />
                 </LeftArrowContainer>
-                <RightArrowContainer>
+                <RightArrowContainer
+                  onClick={() => {
+                    console.log(this.scrollRef);
+                    this.scrollRef.current.scrollLeft += 200;
+                  }}
+                >
                   <RightArrowIconContainer />
                 </RightArrowContainer>
               </div>
