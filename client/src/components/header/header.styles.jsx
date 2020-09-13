@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
+import CartIcon from '../cart-icon/cart-icon.component';
 
 export const HeaderContainer = styled.div`
   height: 70px;
@@ -35,3 +37,13 @@ export const OptionLink = styled(Link)`
 export const OptionDiv = styled.div`
   ${OptionContainerStyles}
 `;
+
+export const CartIconContainer = styled(CartIcon)`
+  &:hover {
+    & > div {
+      visibility: visible;
+    }
+  }
+`;
+
+export const CartDropdownContainer = styled(CartDropdown)``;
