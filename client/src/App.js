@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { GlobalStyles } from './global.styles';
+import 'antd/dist/antd.css';
 
 import Header from './components/header/header.component';
 import Spinner from './components/spinner/spinner.component';
